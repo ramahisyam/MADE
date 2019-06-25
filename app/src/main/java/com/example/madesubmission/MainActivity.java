@@ -14,9 +14,9 @@ import com.example.madesubmission.model.Movie;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private String movieTitle[];
-    private String movieRelease[];
-    private String movieDescription[];
+    private String[] movieTitle;
+    private String[] movieRelease;
+    private String[] movieDescription;
     private TypedArray moviePhoto;
     private MovieAdapter adapter;
     private ArrayList<Movie> movies;
