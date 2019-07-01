@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container_layout, fragment, fragment.getClass().getSimpleName())
                             .commit();
 
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle("Movie");
+                    }
+
                     return true;
                 case R.id.navigation_tv_show:
                     fragment = new TvShowFragment();
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                             .beginTransaction()
                             .replace(R.id.container_layout, fragment, fragment.getClass().getSimpleName())
                             .commit();
+
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle("Tv Show");
+                    }
 
                     return true;
             }

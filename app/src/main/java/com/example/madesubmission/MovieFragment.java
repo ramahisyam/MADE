@@ -1,6 +1,7 @@
 package com.example.madesubmission;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +25,9 @@ import java.util.ArrayList;
 public class MovieFragment extends Fragment {
     private String[] dataTitle;
     private String[] dataDate;
+    private String[] dataDirector;
+    private String[] dataScreenplay;
+    private String[] dataOverview;
     private TypedArray dataPhoto;
     private RecyclerView rvMovie;
     private ArrayList<Movie> movies = new ArrayList<>();
@@ -53,6 +57,9 @@ public class MovieFragment extends Fragment {
     private void prepare() {
         dataTitle = getResources().getStringArray(R.array.movie_title);
         dataDate = getResources().getStringArray(R.array.movie_release);
+        dataDirector = getResources().getStringArray(R.array.director);
+        dataScreenplay = getResources().getStringArray(R.array.screen_play);
+        dataOverview = getResources().getStringArray(R.array.movie_overview);
         dataPhoto = getResources().obtainTypedArray(R.array.movie_photo);
     }
 
@@ -62,6 +69,9 @@ public class MovieFragment extends Fragment {
             movie.setPhoto(dataPhoto.getResourceId(i, -1));
             movie.setTitle(dataTitle[i]);
             movie.setReleaseDate(dataDate[i]);
+            movie.setDirector(dataDirector[i]);
+            movie.setScreenPlay(dataScreenplay[i]);
+            movie.setOverview(dataOverview[i]);
             movies.add(movie);
         }
 
@@ -69,6 +79,15 @@ public class MovieFragment extends Fragment {
         MovieAdapter adapter = new MovieAdapter(getActivity());
         adapter.setListMovie(movies);
         rvMovie.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rvMovie).setOnItemClicListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movies.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
 }
