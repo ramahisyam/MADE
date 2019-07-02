@@ -16,14 +16,14 @@ import com.example.madesubmission.model.Movie;
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
-    private Context context;
+    private final Context context;
     private ArrayList<Movie> listMovie;
 
     public MovieAdapter(Context context) {
         this.context = context;
     }
 
-    public ArrayList<Movie> getListMovie() {
+    private ArrayList<Movie> getListMovie() {
         return listMovie;
     }
 
@@ -53,9 +53,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTitle;
-        TextView tvDate;
-        ImageView imgPhoto;
+        final TextView tvTitle;
+        final TextView tvDate;
+        final ImageView imgPhoto;
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
 

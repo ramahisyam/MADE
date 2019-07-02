@@ -30,7 +30,7 @@ public class MovieFragment extends Fragment {
     private String[] dataOverview;
     private TypedArray dataPhoto;
     private RecyclerView rvMovie;
-    private ArrayList<Movie> movies = new ArrayList<>();
+    private final ArrayList<Movie> movies = new ArrayList<>();
 
     public MovieFragment() {
         // Required empty public constructor

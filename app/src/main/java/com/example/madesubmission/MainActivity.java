@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
 
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle("Movie");
+                        getSupportActionBar().setTitle(R.string.movies);
                     }
 
                     return true;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
 
                     if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle("Tv Show");
+                        getSupportActionBar().setTitle(R.string.tv_show);
                     }
 
                     return true;

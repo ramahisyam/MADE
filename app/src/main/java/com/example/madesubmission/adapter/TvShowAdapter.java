@@ -17,14 +17,14 @@ import com.example.madesubmission.model.TvShow;
 import java.util.ArrayList;
 
 public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>{
-    private Context context;
+    private final Context context;
     private ArrayList<TvShow> listTvShow;
 
     public TvShowAdapter(Context context) {
         this.context = context;
     }
 
-    public ArrayList<TvShow> getListTvShow() {
+    private ArrayList<TvShow> getListTvShow() {
         return listTvShow;
     }
 
@@ -54,9 +54,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
     }
 
     class TvShowViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle;
-        TextView tvDate;
-        ImageView imgPhoto;
+        final TextView tvTitle;
+        final TextView tvDate;
+        final ImageView imgPhoto;
         TvShowViewHolder(@NonNull View itemView) {
             super(itemView);
 

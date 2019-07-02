@@ -26,7 +26,7 @@ public class TvShowFragment extends Fragment {
     private String[] dataOverview;
     private TypedArray dataPhoto;
     private RecyclerView rvTvShow;
-    private ArrayList<TvShow> tvShows = new ArrayList<>();
+    private final ArrayList<TvShow> tvShows = new ArrayList<>();
 
     public TvShowFragment() {
         // Required empty public constructor
