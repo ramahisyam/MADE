@@ -1,12 +1,17 @@
 package com.example.madesubmission;
 
+import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,5 +61,20 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             navigationView.setSelectedItemId(R.id.navigation_movie);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_change_language) {
+            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

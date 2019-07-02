@@ -5,11 +5,13 @@
     <string name="tv_show">Tv Show</string>
     <string name="title">Avenger</string>
     <string name="date">March 32, 2019</string>
-    <string name="directors_label">Director</string>
+    <string name="directors_label">Direktur</string>
     <string name="person_name">Brad pit</string>
-    <string name="screenplays_label">Screenplay</string>
+    <string name="screenplays_label">Skenario</string>
     <string name="description_sample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
-    <string name="overviews_label">OverView</string>
+    <string name="overviews_label">Sinopsis</string>
+    <string name="change_language_settings">Setelan Ganti Bahasa</string>
+    <string name="creator">Kreator</string>
 
     <!--movies data-->
     <string-array name="movie_title">

@@ -1,6 +1,7 @@
 package com.example.madesubmission;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 public class TvShowFragment extends Fragment {
     private String[] dataTitle;
     private String[] dataDate;
+    private String[] dataCreator;
+    private String[] dataOverview;
     private TypedArray dataPhoto;
     private RecyclerView rvTvShow;
     private ArrayList<TvShow> tvShows = new ArrayList<>();
@@ -50,6 +53,8 @@ public class TvShowFragment extends Fragment {
     private void prepare() {
         dataTitle = getResources().getStringArray(R.array.tv_show_title);
         dataDate = getResources().getStringArray(R.array.tv_show_release);
+        dataCreator = getResources().getStringArray(R.array.tv_show_creator);
+        dataOverview = getResources().getStringArray(R.array.tv_show_overview);
         dataPhoto = getResources().obtainTypedArray(R.array.tv_show_photo);
     }
 
@@ -59,6 +64,8 @@ public class TvShowFragment extends Fragment {
             tvShow.setPhoto(dataPhoto.getResourceId(i, -1));
             tvShow.setTitle(dataTitle[i]);
             tvShow.setReleaseDate(dataDate[i]);
+            tvShow.setCreator(dataCreator[i]);
+            tvShow.setOverview(dataOverview[i]);
             tvShows.add(tvShow);
         }
 
@@ -66,5 +73,14 @@ public class TvShowFragment extends Fragment {
         TvShowAdapter adapter = new TvShowAdapter(getActivity());
         adapter.setListTvShow(tvShows);
         rvTvShow.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rvTvShow).setOnItemClicListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(getActivity(), TvShowDetailActivity.class);
+                intent.putExtra(TvShowDetailActivity.EXTRA_TV, tvShows.get(position));
+                startActivity(intent);
+            }
+        });
     }
 }

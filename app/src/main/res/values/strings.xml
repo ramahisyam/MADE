@@ -9,6 +9,8 @@
     <string name="screenplays_label">Screenplay</string>
     <string name="description_sample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="overviews_label">OverView</string>
+    <string name="change_language_settings">Change language settings</string>
+    <string name="creator">Creator</string>
 
     <!--movies data-->
     <string-array name="movie_title">
