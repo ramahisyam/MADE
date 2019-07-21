@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MADESubmission</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie">Movie</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="title">Spider Man: Far from home</string>
+    <string name="overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</string>
+    <string name="vote_average">7.4</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="icon_vote_average">Icon Vote Average</string>
 </resources>
