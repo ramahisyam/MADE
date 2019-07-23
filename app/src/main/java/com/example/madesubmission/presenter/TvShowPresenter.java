@@ -2,47 +2,48 @@ package com.example.madesubmission.presenter;
 
 import android.util.Log;
 
-import com.example.madesubmission.view.movie.MovieView;
 import com.example.madesubmission.data.api.ApiRepository;
 import com.example.madesubmission.data.api.ApiService;
-import com.example.madesubmission.data.model.response.MovieResponse;
+import com.example.madesubmission.data.model.response.TvShowResponse;
+import com.example.madesubmission.view.movie.MovieView;
+import com.example.madesubmission.view.tv.TvShowView;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MoviePresenter {
+public class TvShowPresenter {
     private ApiService service;
-    private MovieView movieView;
+    private TvShowView tvShowView;
 
-    public MoviePresenter(ApiService service, MovieView movieView) {
+    public TvShowPresenter(ApiService service, TvShowView tvShowView) {
         this.service = service;
-        this.movieView = movieView;
+        this.tvShowView = tvShowView;
     }
 
-    public void getMovie() {
-        movieView.showLoading();
+    public void getTvShow() {
+        tvShowView.showLoading();
         service.create()
                 .create(ApiRepository.class)
-                .getMovies()
+                .getTvShows()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MovieResponse>() {
+                .subscribe(new Observer<TvShowResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(MovieResponse movieResponse) {
-                        movieView.showMovieList(movieResponse.getMoviesList());
-                        movieView.hideLoading();
+                    public void onNext(TvShowResponse tvShowResponse) {
+                        tvShowView.showTvList(tvShowResponse.getTvShowList());
+                        tvShowView.hideLoading();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("OnError : ", e.getMessage());
+                        Log.d("onError: ", e.getMessage());
                     }
 
                     @Override

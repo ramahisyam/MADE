@@ -1,4 +1,4 @@
-package com.example.madesubmission;
+package com.example.madesubmission.view.tv;
 
 
 import android.os.Bundle;
@@ -11,55 +11,54 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.example.madesubmission.R;
 import com.example.madesubmission.data.api.ApiService;
-import com.example.madesubmission.data.model.Movies;
-import com.example.madesubmission.presenter.MoviePresenter;
+import com.example.madesubmission.data.model.TvShow;
+import com.example.madesubmission.presenter.TvShowPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Retrofit;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment implements MovieView {
-    private ArrayList<Movies> movieList = new ArrayList<>();
+public class TvShowFragment extends Fragment implements TvShowView{
+    private ArrayList<TvShow> tvShowsList = new ArrayList<>();
     private ProgressBar progressBar;
-    MoviePresenter presenter;
-    MovieAdapter adapter;
+    TvShowPresenter presenter;
+    TvShowAdapter adapter;
     RecyclerView rvMovie;
 
-    public MovieFragment() {
+    public TvShowFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new MoviePresenter(new ApiService(), this);
-        presenter.getMovie();
+        presenter = new TvShowPresenter(new ApiService(), this);
+        presenter.getTvShow();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_tv_show, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvMovie = view.findViewById(R.id.rv_movie);
-        progressBar = view.findViewById(R.id.progressBar);
+        rvMovie = view.findViewById(R.id.rv_tv);
+        progressBar = view.findViewById(R.id.progress_bar_tv);
 
         rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MovieAdapter(getActivity());
-        adapter.setMovieList(movieList);
+        adapter = new TvShowAdapter(getActivity());
+        adapter.setTvShowList(tvShowsList);
         rvMovie.setAdapter(adapter);
     }
 
@@ -74,9 +73,9 @@ public class MovieFragment extends Fragment implements MovieView {
     }
 
     @Override
-    public void showMovieList(List<Movies> moviesList) {
-        movieList.clear();
-        movieList.addAll(moviesList);
+    public void showTvList(List<TvShow> tvShowList) {
+        tvShowsList.clear();
+        tvShowsList.addAll(tvShowList);
         adapter.notifyDataSetChanged();
     }
 }

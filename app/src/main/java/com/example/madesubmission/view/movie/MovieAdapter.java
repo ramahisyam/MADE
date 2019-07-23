@@ -1,4 +1,4 @@
-package com.example.madesubmission;
+package com.example.madesubmission.view.movie;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.madesubmission.R;
 import com.example.madesubmission.data.model.Movies;
 
 import java.util.ArrayList;

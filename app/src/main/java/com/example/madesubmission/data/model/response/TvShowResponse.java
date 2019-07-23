@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TvShowResponse {
-    @SerializedName("result")
+    @SerializedName("results")
     private List<TvShow> tvShowList = new ArrayList<>();
 
     public List<TvShow> getTvShowList() {

@@ -1,4 +1,4 @@
-package com.example.madesubmission;
+package com.example.madesubmission.view.movie;
 
 import com.example.madesubmission.data.model.Movies;
 
