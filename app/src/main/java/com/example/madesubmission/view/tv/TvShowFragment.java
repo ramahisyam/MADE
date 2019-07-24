@@ -1,6 +1,8 @@
 package com.example.madesubmission.view.tv;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 import com.example.madesubmission.R;
 import com.example.madesubmission.data.api.ApiService;
 import com.example.madesubmission.data.model.TvShow;
+import com.example.madesubmission.data.model.response.TvShowResponse;
 import com.example.madesubmission.presenter.TvShowPresenter;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvShowFragment extends Fragment implements TvShowView{
+public class TvShowFragment extends Fragment{
     private ArrayList<TvShow> tvShowsList = new ArrayList<>();
     private ProgressBar progressBar;
     TvShowPresenter presenter;
@@ -38,8 +41,10 @@ public class TvShowFragment extends Fragment implements TvShowView{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new TvShowPresenter(new ApiService(), this);
+        presenter = ViewModelProviders.of(this).get(TvShowPresenter.class);
         presenter.getTvShow();
+        showLoading(true);
+        presenter.getListTv().observe(this, getTv);
 
     }
 
@@ -62,20 +67,19 @@ public class TvShowFragment extends Fragment implements TvShowView{
         rvMovie.setAdapter(adapter);
     }
 
-    @Override
-    public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
+    private Observer<TvShowResponse> getTv = new Observer<TvShowResponse>() {
+        @Override
+        public void onChanged(@Nullable TvShowResponse tvShowResponse) {
+            adapter.setData(tvShowResponse);
+            showLoading(false);
+        }
+    };
 
-    @Override
-    public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showTvList(List<TvShow> tvShowList) {
-        tvShowsList.clear();
-        tvShowsList.addAll(tvShowList);
-        adapter.notifyDataSetChanged();
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

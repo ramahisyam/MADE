@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.madesubmission.R;
 import com.example.madesubmission.data.model.TvShow;
+import com.example.madesubmission.data.model.response.TvShowResponse;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,12 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
 
     void setTvShowList(ArrayList<TvShow> tvShowList) {
         this.tvShowList = tvShowList;
+    }
+
+    public void setData(TvShowResponse items) {
+        tvShowList.clear();
+        tvShowList.addAll(items.getTvShowList());
+        notifyDataSetChanged();
     }
 
     @NonNull

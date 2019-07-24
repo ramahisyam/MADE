@@ -12,12 +12,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.madesubmission.R;
 import com.example.madesubmission.data.model.Movies;
+import com.example.madesubmission.data.model.response.MovieResponse;
 
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
     private final Context context;
-    private ArrayList<Movies> movieList;
+    private ArrayList<Movies> movieList = new ArrayList<>();
 
     MovieAdapter(Context context) {
         this.context = context;
@@ -29,6 +30,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     void setMovieList(ArrayList<Movies> movieList) {
         this.movieList = movieList;
+    }
+
+    public void setData(MovieResponse items) {
+        movieList.clear();
+        movieList.addAll(items.getMoviesList());
+        notifyDataSetChanged();
     }
 
     @NonNull

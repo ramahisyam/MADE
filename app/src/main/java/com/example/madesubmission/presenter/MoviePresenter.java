@@ -1,55 +1,43 @@
 package com.example.madesubmission.presenter;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
-import com.example.madesubmission.view.movie.MovieView;
 import com.example.madesubmission.data.api.ApiRepository;
-import com.example.madesubmission.data.api.ApiService;
 import com.example.madesubmission.data.model.response.MovieResponse;
+import com.example.madesubmission.data.api.ApiService;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MoviePresenter {
-    private ApiService service;
-    private MovieView movieView;
+public class MoviePresenter extends ViewModel {
+    private MutableLiveData<MovieResponse> listMovie;
 
-    public MoviePresenter(ApiService service, MovieView movieView) {
-        this.service = service;
-        this.movieView = movieView;
+    public MoviePresenter() {
+        listMovie = new MutableLiveData<>();
     }
 
     public void getMovie() {
-        movieView.showLoading();
-        service.create()
-                .create(ApiRepository.class)
-                .getMovies()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MovieResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+        ApiService.create()
+            .create(ApiRepository.class)
+            .getMovies()
+            .enqueue(new Callback<MovieResponse>() {
+                @Override
+                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                    listMovie.postValue(response.body());
+                }
 
-                    }
+                @Override
+                public void onFailure(Call<MovieResponse> call, Throwable t) {
+                    Log.d("onFailure: ", t.getMessage());
+                }
+            });
+    }
 
-                    @Override
-                    public void onNext(MovieResponse movieResponse) {
-                        movieView.showMovieList(movieResponse.getMoviesList());
-                        movieView.hideLoading();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("OnError : ", e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d("onComplete: ", "Complete");
-                    }
-                });
-
+    public LiveData<MovieResponse> getListMovie() {
+        return listMovie;
     }
 }

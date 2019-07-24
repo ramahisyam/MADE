@@ -1,6 +1,8 @@
 package com.example.madesubmission.view.movie;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,18 +15,17 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.madesubmission.R;
-import com.example.madesubmission.data.api.ApiService;
 import com.example.madesubmission.data.model.Movies;
+import com.example.madesubmission.data.model.response.MovieResponse;
 import com.example.madesubmission.presenter.MoviePresenter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment implements MovieView {
+public class MovieFragment extends Fragment {
     private ArrayList<Movies> movieList = new ArrayList<>();
     private ProgressBar progressBar;
     MoviePresenter presenter;
@@ -38,14 +39,16 @@ public class MovieFragment extends Fragment implements MovieView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter = new MoviePresenter(new ApiService(), this);
+        presenter = ViewModelProviders.of(this).get(MoviePresenter.class);
         presenter.getMovie();
+        showLoading(true);
+        presenter.getListMovie().observe(this, getMovie);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_movie, container, false);
     }
 
@@ -61,20 +64,19 @@ public class MovieFragment extends Fragment implements MovieView {
         rvMovie.setAdapter(adapter);
     }
 
-    @Override
-    public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
+    private Observer<MovieResponse> getMovie = new Observer<MovieResponse>() {
+        @Override
+        public void onChanged(@Nullable MovieResponse movieResponse) {
+            adapter.setData(movieResponse);
+            showLoading(false);
+        }
+    };
 
-    @Override
-    public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showMovieList(List<Movies> moviesList) {
-        movieList.clear();
-        movieList.addAll(moviesList);
-        adapter.notifyDataSetChanged();
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
