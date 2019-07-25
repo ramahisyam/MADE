@@ -3,6 +3,7 @@ package com.example.madesubmission.presenter;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.madesubmission.data.api.ApiRepository;
@@ -26,7 +27,7 @@ public class MoviePresenter extends ViewModel {
             .getMovies()
             .enqueue(new Callback<MovieResponse>() {
                 @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                     listMovie.postValue(response.body());
                 }
 

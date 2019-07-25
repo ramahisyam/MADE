@@ -9,4 +9,6 @@
     <string name="image_poster">Image Poster</string>
     <string name="icon_vote_average">Icon Vote Average</string>
     <string name="change_language">Change language</string>
+    <string name="date">12 July 2019</string>
+    <string name="label_overview">Overview</string>
 </resources>

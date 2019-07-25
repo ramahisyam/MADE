@@ -7,6 +7,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginBottom="4dp"
+    android:background="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,7 +20,6 @@
             android:id="@+id/img_poster"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/image_poster"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

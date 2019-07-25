@@ -4,6 +4,7 @@ package com.example.madesubmission.presenter;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.madesubmission.data.api.ApiRepository;
@@ -27,7 +28,7 @@ public class TvShowPresenter extends ViewModel {
                 .getTvShows()
                 .enqueue(new Callback<TvShowResponse>() {
                     @Override
-                    public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
+                    public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                         listTv.postValue(response.body());
                     }
 

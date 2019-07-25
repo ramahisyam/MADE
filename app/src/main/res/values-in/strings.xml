@@ -10,4 +10,6 @@
     <string name="image_poster">Poster Gambar</string>
     <string name="icon_vote_average">Ikon suara rata-rata</string>
     <string name="change_language">Ganti Bahasa</string>
+    <string name="date">12 Juli 2019</string>
+    <string name="label_overview">Sinopsis</string>
 </resources>

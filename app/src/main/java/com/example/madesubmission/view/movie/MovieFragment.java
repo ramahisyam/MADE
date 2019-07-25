@@ -3,6 +3,7 @@ package com.example.madesubmission.view.movie;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.madesubmission.R;
 import com.example.madesubmission.data.model.Movies;
 import com.example.madesubmission.data.model.response.MovieResponse;
 import com.example.madesubmission.presenter.MoviePresenter;
+import com.example.madesubmission.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,7 @@ public class MovieFragment extends Fragment {
         adapter = new MovieAdapter(getActivity());
         adapter.setMovieList(movieList);
         rvMovie.setAdapter(adapter);
+        onItemClick();
     }
 
     private Observer<MovieResponse> getMovie = new Observer<MovieResponse>() {
@@ -78,5 +81,16 @@ public class MovieFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private void onItemClick() {
+        ItemClickSupport.addTo(rvMovie).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movieList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 }

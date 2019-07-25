@@ -3,6 +3,7 @@ package com.example.madesubmission.view.tv;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.example.madesubmission.data.api.ApiService;
 import com.example.madesubmission.data.model.TvShow;
 import com.example.madesubmission.data.model.response.TvShowResponse;
 import com.example.madesubmission.presenter.TvShowPresenter;
+import com.example.madesubmission.utils.ItemClickSupport;
+import com.example.madesubmission.view.movie.MovieDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +48,7 @@ public class TvShowFragment extends Fragment{
         presenter.getTvShow();
         showLoading(true);
         presenter.getListTv().observe(this, getTv);
-
+        onItemClick();
     }
 
     @Override
@@ -81,5 +84,16 @@ public class TvShowFragment extends Fragment{
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private void onItemClick() {
+        ItemClickSupport.addTo(rvMovie).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(getActivity(), TvShowDetailActivity.class);
+                intent.putExtra(TvShowDetailActivity.EXTRA_TV, tvShowsList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 }
