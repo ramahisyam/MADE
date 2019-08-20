@@ -5,4 +5,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="movie">Movie</string>
+    <string name="vote_average">7.5</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="icon_vote_average">Icon Vote Average</string>
+    <string name="title">Civil War</string>
+    <string name="overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="date">12 July 2019</string>
+    <string name="image_backdrop">Image Backdrop</string>
 </resources>
